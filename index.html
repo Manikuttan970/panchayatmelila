@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Melila Grama Panchayat | Interactive Map Platform</title>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<!-- Font Awesome -->
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #f5f8f5;
+    color: #333;
+}
+
+/* NAVIGATION */
+
+header {
+    background: #123d2b;
+    color: white;
+    padding: 18px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 21px;
+    font-weight: 700;
+}
+
+.logo span {
+    color: #a8e6a1;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 25px;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: #a8e6a1;
+}
+
+/* HERO SECTION */
+
+.hero {
+    min-height: 570px;
+    background:
+    linear-gradient(rgba(0,40,20,0.65), rgba(0,40,20,0.65)),
+    url("https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1800&q=85");
+
+    background-size: cover;
+    background-position: center;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    padding: 30px;
+}
+
+.hero-content {
+    max-width: 850px;
+}
+
+.hero h1 {
+    font-size: 48px;
+    font-weight: 800;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    font-size: 17px;
+    line-height: 1.8;
+    margin-bottom: 30px;
+}
+
+.hero-buttons a {
+    display: inline-block;
+    padding: 13px 27px;
+    margin: 8px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.primary-btn {
+    background: #66bb6a;
+    color: white;
+}
+
+.secondary-btn {
+    border: 2px solid white;
+    color: white;
+}
+
+.hero-buttons a:hover {
+    transform: translateY(-4px);
+}
+
+/* GENERAL SECTION */
+
+section {
+    padding: 75px 8%;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.section-title h2 {
+    color: #174b32;
+    font-size: 32px;
+    margin-bottom: 12px;
+}
+
+.section-title p {
+    color: #777;
+    font-size: 14px;
+}
+
+/* INTRODUCTION */
+
+.intro {
+    background: white;
+}
+
+.intro-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+}
+
+.intro-content img {
+    width: 100%;
+    height: 330px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.intro-text h3 {
+    color: #21613e;
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.intro-text p {
+    line-height: 1.9;
+    font-size: 14px;
+    color: #555;
+    text-align: justify;
+}
+
+/* GEOGRAPHICAL INFORMATION */
+
+.geography {
+    background: #eef5ef;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+}
+
+.info-card {
+    background: white;
+    padding: 28px 20px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    transition: 0.3s;
+}
+
+.info-card:hover {
+    transform: translateY(-6px);
+}
+
+.info-card i {
+    font-size: 30px;
+    color: #31834e;
+    margin-bottom: 15px;
+}
+
+.info-card h3 {
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: #174b32;
+}
+
+.info-card p {
+    color: #666;
+    font-size: 14px;
+}
+
+/* GEOGRAPHICAL DESCRIPTION */
+
+.geo-description {
+    margin-top: 40px;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    line-height: 1.9;
+    color: #555;
+    text-align: justify;
+}
+
+/* MAP SECTION */
+
+.map-section {
+    background: white;
+    text-align: center;
+}
+
+.map-container {
+    width: 100%;
+    height: 550px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    margin-bottom: 25px;
+}
+
+.map-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.map-button {
+    display: inline-block;
+    padding: 14px 30px;
+    background: #1b7041;
+    color: white;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.map-button:hover {
+    background: #104a2b;
+    transform: translateY(-3px);
+}
+
+/* PHOTO GALLERY */
+
+.gallery {
+    background: #eef5ef;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    height: 260px;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.5s;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.1);
+}
+
+.gallery-item h3 {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 18px;
+    color: white;
+    background: linear-gradient(transparent, rgba(0,0,0,0.8));
+    font-size: 16px;
+}
+
+/* FOOTER */
+
+footer {
+    background: #103b29;
+    color: white;
+    padding: 55px 8% 20px;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 35px;
+    margin-bottom: 35px;
+}
+
+.footer-box h3 {
+    font-size: 20px;
+    margin-bottom: 18px;
+    color: #a8e6a1;
+}
+
+.footer-box p {
+    font-size: 13px;
+    line-height: 1.9;
+    color: #d1dfd5;
+}
+
+.footer-box a {
+    display: block;
+    text-decoration: none;
+    color: #d1dfd5;
+    font-size: 13px;
+    margin-bottom: 12px;
+}
+
+.footer-box a:hover {
+    color: #a8e6a1;
+}
+
+.footer-box i {
+    margin-right: 9px;
+}
+
+.social-icons {
+    margin-top: 15px;
+}
+
+.social-icons a {
+    display: inline-block;
+    font-size: 20px;
+    margin-right: 15px;
+}
+
+.copyright {
+    border-top: 1px solid rgba(255,255,255,0.2);
+    text-align: center;
+    padding-top: 20px;
+    font-size: 12px;
+    color: #b9cbbf;
+}
+
+/* RESPONSIVE DESIGN */
+
+@media(max-width: 850px) {
+
+    header {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    nav {
+        text-align: center;
+    }
+
+    nav a {
+        margin: 5px 8px;
+        display: inline-block;
+    }
+
+    .hero h1 {
+        font-size: 34px;
+    }
+
+    .intro-content {
+        grid-template-columns: 1fr;
+    }
+
+    .info-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media(max-width: 550px) {
+
+    .info-grid,
+    .gallery-grid,
+    .footer-content {
+        grid-template-columns: 1fr;
+    }
+
+    .hero h1 {
+        font-size: 28px;
+    }
+
+    .map-container {
+        height: 400px;
+    }
+
+    section {
+        padding: 55px 6%;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+
+<header>
+
+    <div class="logo">
+        MELILA <span>GRAMAPANCHAYAT</span>
+    </div>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#geography">Geography</a>
+        <a href="#map">Interactive Map</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+</header>
+
+
+<!-- HOME -->
+
+<section class="hero" id="home">
+
+    <div class="hero-content">
+
+        <h1>Welcome to Melila Grama Panchayat</h1>
+
+        <p>
+            Discover the geographical features, natural environment,
+            settlements and important locations of Melila Grama Panchayat
+            through an interactive WebGIS platform.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="#about" class="primary-btn">
+                Explore Melila
+            </a>
+
+            <a href="#map" class="secondary-btn">
+                Explore Interactive Map
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- INTRODUCTION -->
+
+<section class="intro" id="about">
+
+    <div class="section-title">
+
+        <h2>About Melila Grama Panchayat</h2>
+
+        <p>Introduction and geographical identity</p>
+
+    </div>
+
+    <div class="intro-content">
+
+        <div>
+
+            <img
+            src="https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1000&q=85"
+            alt="Green natural landscape">
+
+        </div>
+
+        <div class="intro-text">
+
+            <h3>Introduction</h3>
+
+            <p>
+                Melila Grama Panchayat is a rural local self-government
+                institution situated in Kollam district of Kerala, India.
+                It comes under Vettikkavala Block Panchayat and
+                Kottarakkara Taluk.
+            </p>
+
+            <br>
+
+            <p>
+                The region represents the characteristic rural landscape
+                of Kerala, with settlements, agricultural activities,
+                roads, vegetation and other geographical features.
+                Its natural and human-made resources contribute to
+                the socio-economic development of the area.
+            </p>
+
+            <br>
+
+            <p>
+                This interactive geographical information platform
+                provides an opportunity to explore the spatial
+                characteristics of Melila Grama Panchayat.
+                It integrates geographical information with
+                interactive mapping technology.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- GEOGRAPHICAL INFORMATION -->
+
+<section class="geography" id="geography">
+
+    <div class="section-title">
+
+        <h2>Geographical Information</h2>
+
+        <p>Administrative and spatial characteristics of Melila</p>
+
+    </div>
+
+    <div class="info-grid">
+
+        <div class="info-card">
+
+            <i class="fa-solid fa-location-dot"></i>
+
+            <h3>District</h3>
+
+            <p>Kollam, Kerala</p>
+
+        </div>
+
+        <div class="info-card">
+
+            <i class="fa-solid fa-map"></i>
+
+            <h3>Area</h3>
+
+            <p>18.58 Sq. Km</p>
+
+        </div>
+
+        <div class="info-card">
+
+            <i class="fa-solid fa-building"></i>
+
+            <h3>Block Panchayat</h3>
+
+            <p>Vettikkavala</p>
+
+        </div>
+
+        <div class="info-card">
+
+            <i class="fa-solid fa-landmark"></i>
+
+            <h3>Taluk</h3>
+
+            <p>Kottarakkara</p>
+
+        </div>
+
+        <div class="info-card">
+
+            <i class="fa-solid fa-users"></i>
+
+            <h3>Population</h3>
+
+            <p>21,936</p>
+
+        </div>
+
+        <div class="info-card">
+
+            <i class="fa-solid fa-map-location-dot"></i>
+
+            <h3>Number of Wards</h3>
+
+            <p>15 Wards</p>
+
+        </div>
+
+    </div>
+
+
+    <div class="geo-description">
+
+        <h3 style="color:#21613e; margin-bottom:15px;">
+            Geographical Setting
+        </h3>
+
+        <p>
+            Melila is situated towards the eastern boundary of
+            Kottarakkara Taluk in Kollam district.
+            It shares geographical boundaries with Vilakkudy
+            and Thalavoor villages in Pathanapuram Taluk and
+            Vettikkavala, Chakkuvarackal, Mylom and Kottarakkara
+            villages in Kottarakkara Taluk.
+        </p>
+
+        <br>
+
+        <p>
+            The National Highway 744 and the Kottayam-Thiruvananthapuram
+            State Highway pass through the region. The landscape
+            consists of rural settlements, agricultural land,
+            vegetation and transport networks.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- INTERACTIVE MAP -->
+
+<section class="map-section" id="map">
+
+    <div class="section-title">
+
+        <h2>Interactive WebGIS Map</h2>
+
+        <p>
+            Explore the geographical features and spatial information
+            of Melila Grama Panchayat.
+        </p>
+
+    </div>
+
+    <div class="map-container">
+
+        <iframe
+            src="https://manikuttan970.github.io/mel/"
+            title="Melila Grama Panchayat Interactive Map"
+            loading="lazy"
+            allowfullscreen>
+        </iframe>
+
+    </div>
+
+    <p style="margin-bottom:20px; color:#666; font-size:14px;">
+
+        Explore the map to understand the spatial distribution
+        of geographical features and important locations.
+
+    </p>
+
+    <a href="https://manikuttan970.github.io/mel/"
+       target="_blank"
+       class="map-button">
+
+        <i class="fa-solid fa-map-location-dot"></i>
+        Open Full Interactive Map
+
+    </a>
+
+</section>
+
+
+<!-- PHOTO GALLERY -->
+
+<section class="gallery" id="gallery">
+
+    <div class="section-title">
+
+        <h2>Photo Gallery</h2>
+
+        <p>Natural landscapes and rural environment</p>
+
+    </div>
+
+    <div class="gallery-grid">
+
+        <div class="gallery-item">
+
+            <img
+            src="https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=900&q=85"
+            alt="Green forest landscape">
+
+            <h3>Natural Vegetation</h3>
+
+        </div>
+
+
+        <div class="gallery-item">
+
+            <img
+            src="https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&fit=crop&w=900&q=85"
+            alt="Green countryside">
+
+            <h3>Rural Landscape</h3>
+
+        </div>
+
+
+        <div class="gallery-item">
+
+            <img
+            src="https://images.unsplash.com/photo-1511497584788-876760111969?auto=format&fit=crop&w=900&q=85"
+            alt="Forest trees">
+
+            <h3>Green Environment</h3>
+
+        </div>
+
+
+        <div class="gallery-item">
+
+            <img
+            src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=900&q=85"
+            alt="Agricultural landscape">
+
+            <h3>Agricultural Landscape</h3>
+
+        </div>
+
+
+        <div class="gallery-item">
+
+            <img
+            src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=900&q=85"
+            alt="Natural landscape">
+
+            <h3>Natural Scenery</h3>
+
+        </div>
+
+
+        <div class="gallery-item">
+
+            <img
+            src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=900&q=85"
+            alt="Forest environment">
+
+            <h3>Environmental Resources</h3>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer id="contact">
+
+    <div class="footer-content">
+
+
+        <div class="footer-box">
+
+            <h3>Melila Grama Panchayat</h3>
+
+            <p>
+                An interactive geographical information platform
+                developed to explore and understand the geographical
+                characteristics of Melila Grama Panchayat,
+                Kollam district, Kerala.
+            </p>
+
+        </div>
+
+
+        <div class="footer-box">
+
+            <h3>Quick Links</h3>
+
+            <a href="#home">Home</a>
+
+            <a href="#about">About Melila</a>
+
+            <a href="#geography">Geographical Information</a>
+
+            <a href="#map">Interactive Map</a>
+
+            <a href="#gallery">Photo Gallery</a>
+
+        </div>
+
+
+        <div class="footer-box">
+
+            <h3>Contact Information</h3>
+
+            <p>
+                <i class="fa-solid fa-user"></i>
+                Malavika
+            </p>
+
+            <br>
+
+            <p>
+                <i class="fa-solid fa-envelope"></i>
+                <a href="mailto:msmanikuttan06@gmail.com">
+                    msmanikuttan06@gmail.com
+                </a>
+            </p>
+
+            <br>
+
+            <p>
+                <i class="fa-solid fa-location-dot"></i>
+                Melila, Kollam, Kerala, India
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="copyright">
+
+        <p>
+            © 2026 Melila Grama Panchayat |
+            Interactive WebGIS Platform
+        </p>
+
+        <p style="margin-top:8px;">
+            Designed and Developed by Malavika
+        </p>
+
+    </div>
+
+</footer>
+
+
+</body>
+</html>
